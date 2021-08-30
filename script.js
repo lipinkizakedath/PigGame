@@ -28,6 +28,8 @@ rollDice.addEventListener('click', () => {
 
   if (diceValue !== 1) {
     currentScore += diceValue;
+    if (currentScore >= 100) winnerLock();
+
     document.getElementById(`current--${activeplayer}`).textContent =
       currentScore;
   } else {
@@ -60,11 +62,17 @@ document.querySelector('.btn--new').addEventListener('click', () => {
   scores = [0, 0];
   currentScore = 0;
   activeplayer = 0;
+  dice.classList.add('hidden');
   player1.textContent = 0;
   player2.textContent = 0;
   current0.textContent = 0;
   current1.textContent = 0;
   player0_bg.classList.remove('player--winner');
+  player1_bg.classList.remove('player--winner');
+  document
+    .querySelector(`.player--${activeplayer}`)
+    .classList.add('player--active');
+  rollDice.disabled = false;
 });
 
 function winnerLock() {
